@@ -5,6 +5,16 @@ $(document).ready(function() {
     $("#submmitbutton").hide();
 });
 
+function guiFunctionEndGame(max_score) {
+    console.log("Game Over!!!");
+    console.log("Max Score is: " + max_score);
+}
+
+function guiFunctionScoreMessage(score) {
+    console.log("Turn has happened");
+    console.log("Score is: " + score);
+}
+
 function sayname() {
 	if (gameonging === 0) {
     	var values = {};
@@ -18,15 +28,16 @@ function sayname() {
             values['level'] = 3;
          }
          values['level'] =  parseInt(values['level'])
-         values['attributes'] = parseInt(values['attributes']);
-         console.log(values);
+         values['turns'] = parseInt(values['turns']);
+         //console.log(values);
          $("#myform input").prop("disabled", true);
          $("#startbutton").html('Stop');
          $("#sel").hide();
          $("#sel2").hide();         
          $("#submmitbutton").show();
-
          gameonging = 1;
+         startGameMessage(values);
+
      } else {
      	gameonging = 0;
      	 $("#myform input").prop("disabled", false);
@@ -34,6 +45,8 @@ function sayname() {
          $("#submmitbutton").hide();
          $("#sel").show();
          $("#sel2").show();
+
+        gameoverMessage();
      }
 }
 
@@ -60,7 +73,8 @@ function submity() {
             scores['values'].push(parseFloat(scorestmp[tmpstr]));
         }
     }
-    console.log(scores);
+    //console.log(scores);
+    turnMessage(scores);
 }
 
 

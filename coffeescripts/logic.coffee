@@ -11,19 +11,19 @@ class Logic
 
         @current_attributes = []
 
-   root.startGameMessage = (startGameMessage) ->
+    root.startGameMessage = (startGameMessage) ->
         @initialize()
         @playerName = startGameMessage['playername']
 
         level = startGameMessage['level']
         if level is 1
-            turns = 5
+            attributes = 5
         else if level is 2
-            turns = 10
+            attributes = 10
         else
-            turns = 15
+            attributes = 15
         
-        attributes = startGameMessage['attributes']
+        turns = startGameMessage['turns']
 
         @startGame(attributes, turns)
 
@@ -34,8 +34,13 @@ class Logic
 
     root.createCandidate = ->
         all_attributes = []
-        number_of_positive_candidates = @number_of_attributes / 2
+        console.log("Total number of Attributes: " + @number_of_attributes)
+        number_of_positive_candidates = Math.floor(@number_of_attributes / 2)
         number_of_negative_candidates = @number_of_attributes - number_of_positive_candidates
+
+        console.log "Positive candidate count: " + number_of_positive_candidates
+        console.log "Negative candidate count: " + number_of_negative_candidates
+
         remaining_positive_value = 100
         remaining_negative_value = 100
 
@@ -85,19 +90,24 @@ class Logic
 
         @number_of_turns_remaining--
         if @number_of_turns_remaining <= 0
-            @gameIsOver
+            console.log "GAME OVER BABY, In backend"
+            @gameOver()
 
     root.gameoverMessage = ->
         @gameOver()
 
     root.gameOver = ->
-        @initialize()
         guiFunctionEndGame(@max_score)
+        @initialize()
 
     # Dot Product
     root.scoreVector =  (vectorA, vectorB) ->
         if vectorA.length isnt vectorB.length
+            console.log "Score vector size wrong"
+            console.log "VectorA length: " + vectorA.length
+            console.log "VectorB length: " + vectorB.length
             throw "can't dot product different length arrays"
+
         score = 0
         for value, index in vectorA
             score += value * vectorB[index]
