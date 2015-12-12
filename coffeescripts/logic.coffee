@@ -56,18 +56,24 @@ class Logic
 
         array
 
-	root.turnMade = (guessed_attributes) ->
-		score = @scoreVector(guessed_attributes, @current_attributes)
-        callGUIFunctionScoreMessage(score)
-		if score > @max_score
-			@max_score = score
+    root.turnMade = (guessed_attributes) ->
+        score = @scoreVector(guessed_attributes, @current_attributes)
+        guiFunctionScoreMessage(score)
+        if score > @max_score
+            @max_score = score
 
         @number_of_turns_remaining--
         if @number_of_turns_remaining <= 0
             @gameIsOver
 
     root.gameOver = ->
-        callGUIFunctionEndGame(@max_score)
+        guiFunctionEndGame(@max_score)
+
+    root.coffeeTest = ->
+        console.log "HOLY SHIT WE IN COFFEE"
+
+    root.testFunction = ->
+        guiTestFunction()
 
     # Dot Product
     root.scoreVector =  (vectorA, vectorB) ->
