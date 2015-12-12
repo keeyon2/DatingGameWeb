@@ -7,12 +7,29 @@ class Logic
         @number_of_turns_remaining = 0
         @number_of_attributes = 0
         @max_score = -100
+        @playerName = ""
 
         @current_attributes = []
 
+   root.startGameMessage = (startGameMessage) ->
+        @initialize()
+        @playerName = startGameMessage['playername']
+
+        level = startGameMessage['level']
+        if level is 1
+            turns = 5
+        else if level is 2
+            turns = 10
+        else
+            turns = 15
+        
+        attributes = startGameMessage['attributes']
+
+        @startGame(attributes, turns)
+
     root.startGame = (total_atr, total_turns) ->
-        @number_of_turns_remaining = total_atr
-        @number_of_attributes = total_turns
+        @number_of_turns_remaining = total_turns
+        @number_of_attributes = total_atr
         @createCandidate()
 
     root.createCandidate = ->
@@ -56,6 +73,10 @@ class Logic
 
         array
 
+    root.turnMessage = (turnMessageJson) ->
+        valuesArray = turnMessageJson['values']
+        @turnMade(valuesArray)
+
     root.turnMade = (guessed_attributes) ->
         score = @scoreVector(guessed_attributes, @current_attributes)
         guiFunctionScoreMessage(score)
@@ -66,14 +87,12 @@ class Logic
         if @number_of_turns_remaining <= 0
             @gameIsOver
 
+    root.gameoverMessage = ->
+        @gameOver()
+
     root.gameOver = ->
+        @initialize()
         guiFunctionEndGame(@max_score)
-
-    root.coffeeTest = ->
-        console.log "HOLY SHIT WE IN COFFEE"
-
-    root.testFunction = ->
-        guiTestFunction()
 
     # Dot Product
     root.scoreVector =  (vectorA, vectorB) ->

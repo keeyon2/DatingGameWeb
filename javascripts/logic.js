@@ -15,92 +15,112 @@
       this.number_of_turns_remaining = 0;
       this.number_of_attributes = 0;
       this.max_score = -100;
+      this.playerName = "";
       return this.current_attributes = [];
-    };
-
-    root.startGame = function(total_atr, total_turns) {
-      this.number_of_turns_remaining = total_atr;
-      this.number_of_attributes = total_turns;
-      return this.createCandidate();
-    };
-
-    root.createCandidate = function() {
-      var all_attributes, candidate, i, j, number_of_negative_candidates, number_of_positive_candidates, ref, ref1, remaining_negative_value, remaining_positive_value, value;
-      all_attributes = [];
-      number_of_positive_candidates = this.number_of_attributes / 2;
-      number_of_negative_candidates = this.number_of_attributes - number_of_positive_candidates;
-      remaining_positive_value = 100;
-      remaining_negative_value = 100;
-      for (candidate = i = 1, ref = number_of_positive_candidates - 1; 1 <= ref ? i <= ref : i >= ref; candidate = 1 <= ref ? ++i : --i) {
-        value = Math.floor(Math.random() * remaining_positive_value);
-        remaining_positive_value -= value;
-        value = value / 100;
-        all_attributes.push(value);
-      }
-      all_attributes.push(remaining_positive_value / 100);
-      for (candidate = j = 1, ref1 = number_of_negative_candidates - 1; 1 <= ref1 ? j <= ref1 : j >= ref1; candidate = 1 <= ref1 ? ++j : --j) {
-        value = Math.floor(Math.random() * remaining_negative_value);
-        remaining_negative_value -= value;
-        value = value / 100;
-        all_attributes.push(value * -1);
-      }
-      all_attributes.push((remaining_negative_value / 100) * -1);
-      return this.current_attributes = this.shuffleArray(all_attributes);
-    };
-
-    root.shuffleArray = function(array) {
-      var currentIndex, randomIndex, temporaryValue;
-      currentIndex = array.length;
-      while (0 !== currentIndex) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-      return array;
-    };
-
-    root.turnMade = function(guessed_attributes) {
-      var score;
-      score = this.scoreVector(guessed_attributes, this.current_attributes);
-      guiFunctionScoreMessage(score);
-      if (score > this.max_score) {
-        this.max_score = score;
-      }
-      this.number_of_turns_remaining--;
-      if (this.number_of_turns_remaining <= 0) {
-        return this.gameIsOver;
-      }
-    };
-
-    root.gameOver = function() {
-      return guiFunctionEndGame(this.max_score);
-    };
-
-    root.coffeeTest = function() {
-      return console.log("HOLY SHIT WE IN COFFEE");
-    };
-
-    root.testFunction = function() {
-      return guiTestFunction();
-    };
-
-    root.scoreVector = function(vectorA, vectorB) {
-      var i, index, len, score, value;
-      if (vectorA.length !== vectorB.length) {
-        throw "can't dot product different length arrays";
-      }
-      score = 0;
-      for (index = i = 0, len = vectorA.length; i < len; index = ++i) {
-        value = vectorA[index];
-        score += value * vectorB[index];
-      }
-      return score = score.toFixed(4);
     };
 
     return Logic;
 
   })();
+
+  root.startGameMessage = function(startGameMessage) {
+    var attributes, level, turns;
+    this.initialize();
+    this.playerName = startGameMessage['playername'];
+    level = startGameMessage['level'];
+    if (level === 1) {
+      turns = 5;
+    } else if (level === 2) {
+      turns = 10;
+    } else {
+      turns = 15;
+    }
+    attributes = startGameMessage['attributes'];
+    return this.startGame(attributes, turns);
+  };
+
+  root.startGame = function(total_atr, total_turns) {
+    this.number_of_turns_remaining = total_turns;
+    this.number_of_attributes = total_atr;
+    return this.createCandidate();
+  };
+
+  root.createCandidate = function() {
+    var all_attributes, candidate, i, j, number_of_negative_candidates, number_of_positive_candidates, ref, ref1, remaining_negative_value, remaining_positive_value, value;
+    all_attributes = [];
+    number_of_positive_candidates = this.number_of_attributes / 2;
+    number_of_negative_candidates = this.number_of_attributes - number_of_positive_candidates;
+    remaining_positive_value = 100;
+    remaining_negative_value = 100;
+    for (candidate = i = 1, ref = number_of_positive_candidates - 1; 1 <= ref ? i <= ref : i >= ref; candidate = 1 <= ref ? ++i : --i) {
+      value = Math.floor(Math.random() * remaining_positive_value);
+      remaining_positive_value -= value;
+      value = value / 100;
+      all_attributes.push(value);
+    }
+    all_attributes.push(remaining_positive_value / 100);
+    for (candidate = j = 1, ref1 = number_of_negative_candidates - 1; 1 <= ref1 ? j <= ref1 : j >= ref1; candidate = 1 <= ref1 ? ++j : --j) {
+      value = Math.floor(Math.random() * remaining_negative_value);
+      remaining_negative_value -= value;
+      value = value / 100;
+      all_attributes.push(value * -1);
+    }
+    all_attributes.push((remaining_negative_value / 100) * -1);
+    return this.current_attributes = this.shuffleArray(all_attributes);
+  };
+
+  root.shuffleArray = function(array) {
+    var currentIndex, randomIndex, temporaryValue;
+    currentIndex = array.length;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  };
+
+  root.turnMessage = function(turnMessageJson) {
+    var valuesArray;
+    valuesArray = turnMessageJson['values'];
+    return this.turnMade(valuesArray);
+  };
+
+  root.turnMade = function(guessed_attributes) {
+    var score;
+    score = this.scoreVector(guessed_attributes, this.current_attributes);
+    guiFunctionScoreMessage(score);
+    if (score > this.max_score) {
+      this.max_score = score;
+    }
+    this.number_of_turns_remaining--;
+    if (this.number_of_turns_remaining <= 0) {
+      return this.gameIsOver;
+    }
+  };
+
+  root.gameoverMessage = function() {
+    return this.gameOver();
+  };
+
+  root.gameOver = function() {
+    this.initialize();
+    return guiFunctionEndGame(this.max_score);
+  };
+
+  root.scoreVector = function(vectorA, vectorB) {
+    var i, index, len, score, value;
+    if (vectorA.length !== vectorB.length) {
+      throw "can't dot product different length arrays";
+    }
+    score = 0;
+    for (index = i = 0, len = vectorA.length; i < len; index = ++i) {
+      value = vectorA[index];
+      score += value * vectorB[index];
+    }
+    return score = score.toFixed(4);
+  };
 
 }).call(this);
