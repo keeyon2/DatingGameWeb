@@ -25,8 +25,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/4.10.3/css/bootstrap-slider.css"
           rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="http://orzzzl.github.io/Community-Recommendation/Website/community/rcmOnFacts/static/base.css" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -223,7 +221,18 @@
                             <input name="gender" value="3" type="radio">Hard
                         </label>
                     </div>
+			<br><br>
+            <div class="form-group">
+                <h4> Candidates#: </h4> <br>
 
+                <div class="col-sm-7 col-md-7">
+                    <input name="cand" id="cand" data-slider-id='mySlider' type="text" data-slider-min="1"
+                           data-slider-max="50" data-slider-step="1" value="1"
+                           data-slider-value="0">
+                </div>
+            </div>
+
+ <button type="submit" name="submitType" id="startgame" class="btn btn-lg btn-warning" value="1">Start Game</button>
 					<!-- Column four end -->
 				</div>
 			</div>
