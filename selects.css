@@ -96,6 +96,21 @@ body {
 	margin-top:50%;
 }
 
+h3 {
+    display: inline;
+}
+
+#stats {
+	visibility: hidden;
+    clear: both;	
+	color: white;
+	background: red;
+}
+
+.leveltext {
+	margin-left: 8% ;
+}
+
 #startgame {
 	margin-left: 30%;
 	margin-top:10%;
