@@ -25,7 +25,14 @@ function sayname() {
          $("#sel").hide();
          $("#sel2").hide();         
          $("#submmitbutton").show();
-
+        $('#stats').css('visibility','visible');
+         $("#statsplayername").html('<h3>' + values['playername'] + '</h3>');
+         if (values['level'] === 1)
+             $("#statslevel").html('<h3> Easy </h3>');
+        if (values['level'] === 2)
+             $("#statslevel").html('<h3> Medium </h3>');
+        if (values['level'] === 3)
+             $("#statslevel").html('<h3> Hard </h3>'); 
          gameonging = 1;
      } else {
      	gameonging = 0;
