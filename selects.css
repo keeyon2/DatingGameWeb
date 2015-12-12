@@ -91,6 +91,11 @@ body {
     margin-right: 60%;
 }
 
+#submmitbutton {
+    margin-left: 30%;
+	margin-top:50%;
+}
+
 #startgame {
 	margin-left: 30%;
 	margin-top:10%;
