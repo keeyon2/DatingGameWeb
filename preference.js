@@ -98,10 +98,10 @@ $("#attr15").slider({
 $("#attr15").on("slide", function (slideEvt) {
     $("#eatingSliderVal").text(slideEvt.value);
 });
-$("#cand").slider({
+$("#attributes").slider({
 	tooltip: 'always'
 });
-$("#cand").on("slide", function (slideEvt) {
+$("#attributes").on("slide", function (slideEvt) {
     $("#eatingSliderVal").text(slideEvt.value);
 });
 

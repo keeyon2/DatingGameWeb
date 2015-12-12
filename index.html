@@ -40,6 +40,7 @@
 
 <div id="gameArea">
 <div id="container4">
+  <form id="coreform">
 	<div id="container3">
 		<div id="container2">
 			<div id="container1">
@@ -211,6 +212,7 @@
             </br></br>
 					<!-- Column three end -->
 				</div>
+      </form>
 				<div id="col4">
 					<!-- Column four start -->
 
@@ -221,13 +223,13 @@
             <div id="sel">
                     <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-success" onclick="easyclick()">
-                            <input name="gender" value="1" type="radio">Easy
+                            <input name="level" value="1" type="radio">Easy
                         </label>
                         <label class="btn btn-success" onclick="mediumclick()">
-                            <input name="gender" value="2" type="radio">Medium
+                            <input name="level" value="2" type="radio">Medium
                         </label>
                         <label class="btn btn-success" onclick="hardclick()">
-                            <input name="gender" value="3" type="radio">Hard
+                            <input name="level" value="3" type="radio">Hard
                         </label>
                     </div>
 			<br>
@@ -235,7 +237,7 @@
                 <h4> Candidates#: </h4> <br>
 
                 <div class="col-sm-7 col-md-7">
-                    <input name="cand" id="cand" data-slider-id='mySlider' type="text" data-slider-min="1"
+                    <input name="attributes" id="attributes" data-slider-id='mySlider' type="text" data-slider-min="1"
                            data-slider-max="50" data-slider-step="1" value="1"
                            data-slider-value="0">
                 </div>
@@ -251,7 +253,7 @@
     </div>
   </div>
 </form>
-          <button id="submmitbutton" class="btn btn-default btn-lg" type="button" onclick="sayname()">Submit</button>
+          <button id="submmitbutton" class="btn btn-default btn-lg" type="button" onclick="submity()">Submit</button>
 					<!-- Column four end -->
 				</div>
 			</div>
