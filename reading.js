@@ -20,9 +20,25 @@ function guiFunctionScoreMessage(score) {
     $("#statsbest").html('<h3> ' + currentbest + '</h3>');
     $("#statscnt").html('<h3> ' + cnt + '</h3>');
     var N = buffer.length;
-    for (var i = 0; i <= N - 1; i++) $('#res').append(" " + buffer[i] + " ");
-    $('#res').append(" " + score + " ");
-    $('#res').append('<br>');
+    //for (var i = 0; i <= N - 1; i++) $('#res').append(" " + buffer[i] + " ");
+    //$('#res').append(" " + score + " ");
+    //$('#res').append('<br>');
+    //
+    
+    // Logic to add Values and score on GUI
+    var gameDiv = document.getElementById("gameArea");
+    var tableRow = document.createElement("tr");
+    tableRow.style.cssText = "border-spacing: 10px;boarder-collapse: seperate";
+    for (var i = 0; i < N; i++) {
+        var tableTD = document.createElement("td");
+        var elementValue = document.createTextNode(buffer[i]);
+        tableTD.appendChild(elementValue);
+        var backgroundColor = "#748ea9";
+        var bMessage = "padding: 10px; background-color: " + backgroundColor;
+        tableTD.style.cssText =  bMessage;
+        tableRow.appendChild(tableTD);
+    }
+    gameDiv.appendChild(tableRow);
 }
 
 function sayname() {
