@@ -33,8 +33,12 @@ function guiFunctionScoreMessage(score) {
         var tableTD = document.createElement("td");
         var elementValue = document.createTextNode(buffer[i]);
         tableTD.appendChild(elementValue);
-        var backgroundColor = "#748ea9";
+        var RGBValue = calculateColorValue(buffer[i]);
+        var backgroundColor = "rgb(" + RGBValue + "," + RGBValue +
+            "," + RGBValue + ")";
         var bMessage = "padding: 10px; background-color: " + backgroundColor;
+        console.log("The css style string is:");
+        console.log(bMessage);
         tableTD.style.cssText =  bMessage;
         tableRow.appendChild(tableTD);
     }
@@ -119,6 +123,14 @@ function submity() {
     turnMessage(scores);
 }
 
+function calculateColorValue(value) {
+    var inverseValue = 1 - value;
+    console.log("Inverse value: " + inverseValue);
+    var finalV = Math.floor(inverseValue * 120);
+    console.log("Value after Floor: " + finalV);
+
+    return Math.floor(finalV + 112);
+}
 
 function easyclick() {
     levelsel = 1;
