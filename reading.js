@@ -98,6 +98,30 @@ function sayname() {
              $("#statslevel").html('<h3> Hard </h3>');
 
         $('#res').css('visibility','visible');
+        var gameDiv = document.getElementById("gameArea");
+        var tableRow = document.createElement("tr");
+        tableRow.className = "scoreTable";
+        tableRow.style.cssText = "border-spacing: 10px;boarder-collapse: seperate";
+        var N = values['level'] * 5;
+        for (var i = 0; i <= N; i++) {
+            var tableTD = document.createElement("td");
+            var elementValue;
+            if (i < N)
+                elementValue = document.createTextNode(i + 1);
+            else 
+                elementValue = document.createTextNode("Score");
+            tableTD.appendChild(elementValue);
+            var RGBValue = calculateColorValue(0.5);
+            var backgroundColor = "rgb(" + RGBValue + "," + RGBValue +
+            "," + RGBValue + ")";
+            var bMessage = "padding: 10px; background-color: " + backgroundColor;
+            console.log("The css style string is:");
+            console.log(bMessage);
+            tableTD.style.cssText =  bMessage;
+            tableRow.appendChild(tableTD);
+        }     
+         tableRow.appendChild(tableTD);
+         gameDiv.appendChild(tableRow);
          gameonging = 1;
          startGameMessage(values);
 
