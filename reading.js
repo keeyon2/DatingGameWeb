@@ -1,18 +1,28 @@
 var gameonging = 0;
 var levelsel = 3;
+var cnt;
+var currentbest = -1;
+var buffer 
+
 
 $(document).ready(function() {
     $("#submmitbutton").hide();
 });
 
 function guiFunctionEndGame(max_score) {
-    console.log("Game Over!!!");
-    console.log("Max Score is: " + max_score);
+    alert("Game Over!!!" + "Max Score is: " + max_score);
+    sayname();
 }
 
 function guiFunctionScoreMessage(score) {
-    console.log("Turn has happened");
-    console.log("Score is: " + score);
+    currentbest = Math.max(score, currentbest);
+    cnt -= 1;
+    $("#statsbest").html('<h3> ' + currentbest + '</h3>');
+    $("#statscnt").html('<h3> ' + cnt + '</h3>');
+    var N = buffer.length;
+    for (var i = 0; i <= N - 1; i++) $('#res').append(" " + buffer[i] + " ");
+    $('#res').append(" " + score + " ");
+    $('#res').append('<br>');
 }
 
 function sayname() {
@@ -35,14 +45,20 @@ function sayname() {
          $("#sel").hide();
          $("#sel2").hide();         
          $("#submmitbutton").show();
-        $('#stats').css('visibility','visible');
+         $('#stats').css('visibility','visible');
+         cnt = values['turns'];
+         currentbest = -1;
+          $("#statsbest").html('<h3> ' + -1 + '</h3>');
+          $("#statscnt").html('<h3> ' + cnt + '</h3>'); 
          $("#statsplayername").html('<h3>' + values['playername'] + '</h3>');
          if (values['level'] === 1)
              $("#statslevel").html('<h3> Easy </h3>');
         if (values['level'] === 2)
              $("#statslevel").html('<h3> Medium </h3>');
         if (values['level'] === 3)
-             $("#statslevel").html('<h3> Hard </h3>'); 
+             $("#statslevel").html('<h3> Hard </h3>');
+
+        $('#res').css('visibility','visible');
          gameonging = 1;
          startGameMessage(values);
 
@@ -54,7 +70,7 @@ function sayname() {
          $("#sel").show();
          $("#sel2").show();
 
-        gameoverMessage();
+       // gameoverMessage();
      }
 }
 
@@ -81,6 +97,8 @@ function submity() {
             scores['values'].push(parseFloat(scorestmp[tmpstr]));
         }
     }
+    buffer = scores['values'];
+
     //console.log(scores);
     turnMessage(scores);
 }
