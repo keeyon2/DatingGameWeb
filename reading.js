@@ -98,7 +98,7 @@ function submity() {
         }
     }
     buffer = scores['values'];
-
+    $('#submmitbutton').blur();
     //console.log(scores);
     turnMessage(scores);
 }
