@@ -9,8 +9,13 @@ $(document).ready(function() {
     $("#submmitbutton").hide();
 });
 
+function removeRes() {
+    $('.scoreTable').remove();
+}
+
 function guiFunctionEndGame(max_score) {
     alert("Game Over!!!" + "Max Score is: " + max_score);
+    removeRes();
     sayname();
 }
 
@@ -28,6 +33,7 @@ function guiFunctionScoreMessage(score) {
     // Logic to add Values and score on GUI
     var gameDiv = document.getElementById("gameArea");
     var tableRow = document.createElement("tr");
+    tableRow.className = "scoreTable";
     tableRow.style.cssText = "border-spacing: 10px;boarder-collapse: seperate";
     for (var i = 0; i < N; i++) {
         var tableTD = document.createElement("td");
@@ -38,6 +44,16 @@ function guiFunctionScoreMessage(score) {
         tableTD.style.cssText =  bMessage;
         tableRow.appendChild(tableTD);
     }
+    var tableTD = document.createElement("td");
+    var elementValue = document.createTextNode(score);
+    tableTD.appendChild(elementValue);
+    var backgroundColor = "#748ea9";
+    var fontcolor = "red";
+    if (score >= 0) 
+        fontcolor = "green"
+    var bMessage = "padding: 10px; background-color: " + backgroundColor + "; color: " + fontcolor;
+    tableTD.style.cssText =  bMessage;
+    tableRow.appendChild(tableTD);
     gameDiv.appendChild(tableRow);
 }
 
@@ -80,12 +96,13 @@ function sayname() {
 
      } else {
      	gameonging = 0;
+         $('#stats').css('visibility','hidden');
      	 $("#myform input").prop("disabled", false);
          $("#startbutton").html('Start!');
          $("#submmitbutton").hide();
          $("#sel").show();
          $("#sel2").show();
-
+         removeRes();
        // gameoverMessage();
      }
 }
