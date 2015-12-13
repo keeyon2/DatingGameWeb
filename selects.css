@@ -107,6 +107,13 @@ h3 {
 	background: red;
 }
 
+#res {
+	visibility: hidden;
+    clear: both;	
+	color: white;
+	background: black;
+}
+
 .leveltext {
 	margin-left: 8% ;
 }
