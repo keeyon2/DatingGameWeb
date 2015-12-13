@@ -34,12 +34,8 @@ class Logic
 
     root.createCandidate = ->
         all_attributes = []
-        console.log("Total number of Attributes: " + @number_of_attributes)
         number_of_positive_candidates = Math.floor(@number_of_attributes / 2)
         number_of_negative_candidates = @number_of_attributes - number_of_positive_candidates
-
-        console.log "Positive candidate count: " + number_of_positive_candidates
-        console.log "Negative candidate count: " + number_of_negative_candidates
 
         remaining_positive_value = 100
         remaining_negative_value = 100
@@ -90,7 +86,6 @@ class Logic
 
         @number_of_turns_remaining--
         if @number_of_turns_remaining <= 0
-            console.log "GAME OVER BABY, In backend"
             @gameOver()
 
     root.gameoverMessage = ->
