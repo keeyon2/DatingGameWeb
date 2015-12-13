@@ -44,11 +44,8 @@
     root.createCandidate = function() {
       var all_attributes, candidate, i, j, number_of_negative_candidates, number_of_positive_candidates, ref, ref1, remaining_negative_value, remaining_positive_value, value;
       all_attributes = [];
-      console.log("Total number of Attributes: " + this.number_of_attributes);
       number_of_positive_candidates = Math.floor(this.number_of_attributes / 2);
       number_of_negative_candidates = this.number_of_attributes - number_of_positive_candidates;
-      console.log("Positive candidate count: " + number_of_positive_candidates);
-      console.log("Negative candidate count: " + number_of_negative_candidates);
       remaining_positive_value = 100;
       remaining_negative_value = 100;
       for (candidate = i = 1, ref = number_of_positive_candidates - 1; 1 <= ref ? i <= ref : i >= ref; candidate = 1 <= ref ? ++i : --i) {
@@ -96,7 +93,6 @@
       }
       this.number_of_turns_remaining--;
       if (this.number_of_turns_remaining <= 0) {
-        console.log("GAME OVER BABY, In backend");
         return this.gameOver();
       }
     };
