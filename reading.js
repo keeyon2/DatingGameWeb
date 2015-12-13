@@ -25,10 +25,6 @@ function guiFunctionScoreMessage(score) {
     $("#statsbest").html('<h3> ' + currentbest + '</h3>');
     $("#statscnt").html('<h3> ' + cnt + '</h3>');
     var N = buffer.length;
-    //for (var i = 0; i <= N - 1; i++) $('#res').append(" " + buffer[i] + " ");
-    //$('#res').append(" " + score + " ");
-    //$('#res').append('<br>');
-    //
     
     // Logic to add Values and score on GUI
     var gameDiv = document.getElementById("gameArea");
@@ -48,14 +44,21 @@ function guiFunctionScoreMessage(score) {
         tableTD.style.cssText =  bMessage;
         tableRow.appendChild(tableTD);
     }
+    
     var tableTD = document.createElement("td");
     var elementValue = document.createTextNode(score);
     tableTD.appendChild(elementValue);
-    var backgroundColor = "#748ea9";
-    var fontcolor = "red";
-    if (score >= 0) 
-        fontcolor = "green"
-    var bMessage = "padding: 10px; background-color: " + backgroundColor + "; color: " + fontcolor;
+    var RGBValue = calculateColorValue(Math.abs(score));
+    var backgroundColor = "rgb(" + RGBValue + "," + RGBValue +
+        "," + RGBValue + ")";
+
+    if (score > 0) {
+        backgroundColor = "rgb(0," + RGBValue + ",0)";
+    }
+    else {
+        backgroundColor = "rgb(" + RGBValue + ",0,0)";
+    }
+    var bMessage = "padding: 10px; background-color: " + backgroundColor;
     tableTD.style.cssText =  bMessage;
     tableRow.appendChild(tableTD);
     gameDiv.appendChild(tableRow);
